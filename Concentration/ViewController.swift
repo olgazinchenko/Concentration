@@ -36,9 +36,8 @@ class ViewController: UIViewController {
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
         updateViewFromModel()
         flipCount = 0
-        emojiChoices = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎", "🧛‍♂️", "🧟‍♀️", "🧙‍♂️"]
+        emojiChoices = ViewController.randomTheme()
     }
-    
     
     func updateViewFromModel() {
         for index in cardButtons.indices {
@@ -54,7 +53,24 @@ class ViewController: UIViewController {
         }
     }
     
-    var emojiChoices = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎", "🧛‍♂️", "🧟‍♀️", "🧙‍♂️"]
+    static let themes = [
+        ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎", "🧛‍♂️", "🧟‍♀️", "🧙‍♂️"],
+        ["😀","😆","😅","🤣","😇","😉","😍","😋","😝", "😎", "🥺", "🤬"],
+        ["🙌","👍","🤘","🖖","🤙","✊","👌","👏","👆", "💪", "☝️", "🤝"],
+        ["⚽️","🏀","🏈","⚾️","🥎","🎾","🏐","🏉","🥏", "🎱", "🏓", "🏸"],
+        ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐨", "🐯", "🦁", "🐷"],
+        ["🍄","🌷","🌺","🌸","🌼","🌻","🥀","💐","🌾", "🍀", "☘️", "🌵"]
+    ]
+    
+    static func randomTheme() -> [String] {
+        if let randomTheme: [String] = themes.randomElement() {
+            return randomTheme
+        } else {
+            return ["??"]
+        }
+    }
+    
+    var emojiChoices = randomTheme()
     
     var emoji = [Int:String]()
     
