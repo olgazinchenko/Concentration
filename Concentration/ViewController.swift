@@ -11,19 +11,16 @@ import UIKit
 class ViewController: UIViewController {
     
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
-    
-    var flipCount = 0 {
-        didSet {
-            flipCountLabel.text = "Flips: \(flipCount)"
-        }
-    }
 
     @IBOutlet weak var flipCountLabel: UILabel!
+    
+    @IBOutlet weak var scoreCountLabel: UILabel!
     
     @IBOutlet var cardButtons: [UIButton]!
     
     @IBAction func touchCard(_ sender: UIButton) {
-        flipCount += 1
+        let flipCount = game.incrementFlipCount()
+        flipCountLabel.text = "Flips: \(flipCount)"
         if let cardNumber = cardButtons.firstIndex(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -34,8 +31,8 @@ class ViewController: UIViewController {
     
     @IBAction func newGame(_ sender: UIButton) {
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+        flipCountLabel.text = "Flips: \(game.getFlipCount())"
         updateViewFromModel()
-        flipCount = 0
         emojiChoices = ViewController.randomTheme()
     }
     
