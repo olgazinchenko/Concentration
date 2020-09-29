@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         if let cardNumber = cardButtons.firstIndex(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
+            scoreCountLabel.text = "Score: \(String(calculateGameScore(for: sender)))"
         } else {
             print("Choosen card not in cardButtons")
         }
@@ -32,8 +33,10 @@ class ViewController: UIViewController {
     @IBAction func newGame(_ sender: UIButton) {
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
         flipCountLabel.text = "Flips: \(game.getFlipCount())"
-        updateViewFromModel()
         emojiChoices = ViewController.randomTheme()
+        updateViewFromModel()
+        scoreEmojis = [String]()
+        score = 0
     }
     
     func updateViewFromModel() {
@@ -68,7 +71,6 @@ class ViewController: UIViewController {
     }
     
     var emojiChoices = randomTheme()
-    
     var emoji = [Int:String]()
     
     func emoji(for card: Card) -> String {
@@ -77,5 +79,34 @@ class ViewController: UIViewController {
             emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
         }
         return emoji[card.identifier] ?? "?"
+    }
+    
+    var score = 0
+    var scoreEmojis = [String]()
+        
+    func calculateGameScore(for sender: UIButton) -> Int {
+        let card = game.cards
+        let button = sender
+        for index in cardButtons.indices {
+            let checkButton = cardButtons[index]
+            if button == checkButton, card[index].isFaceUp {
+                scoreEmojis.append(String(button.currentTitle ?? "?"))
+            }
+            if card[index].isFaceUp, card[index].isMatched, button == checkButton {
+                score += 2
+                scoreEmojis = scoreEmojis.filter {
+                    $0 != String(button.currentTitle ?? "?")
+                }
+            }
+        }
+        if scoreEmojis.count > 2 {
+            let checkEmoji = scoreEmojis[scoreEmojis.count - 2]
+            for index in 0..<scoreEmojis.count - 2 {
+                if checkEmoji == scoreEmojis[index] {
+                        score -= 1
+                }
+            }
+        }
+        return score
     }
 }
