@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     @IBAction func newGame(_ sender: UIButton) {
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
         flipCountLabel.text = "Flips: \(game.getFlipCount())"
-        emojiChoices = ViewController.randomTheme()
+        emojiChoices = ViewController.randomTheme().emojis
         updateViewFromModel()
         scoreEmojis = [String]()
         score = 0
@@ -53,24 +53,54 @@ class ViewController: UIViewController {
         }
     }
     
-    static let themes = [
-        ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎", "🧛‍♂️", "🧟‍♀️", "🧙‍♂️"],
-        ["😀","😆","😅","🤣","😇","😉","😍","😋","😝", "😎", "🥺", "🤬"],
-        ["🙌","👍","🤘","🖖","🤙","✊","👌","👏","👆", "💪", "☝️", "🤝"],
-        ["⚽️","🏀","🏈","⚾️","🥎","🎾","🏐","🏉","🥏", "🎱", "🏓", "🏸"],
-        ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐨", "🐯", "🦁", "🐷"],
-        ["🍄","🌷","🌺","🌸","🌼","🌻","🥀","💐","🌾", "🍀", "☘️", "🌵"]
-    ]
+    static let halloweenTheme = Theme(
+        emojis: ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎", "🧛‍♂️", "🧟‍♀️", "🧙‍♂️"],
+        backgroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
+        cardColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+    )
     
-    static func randomTheme() -> [String] {
-        if let randomTheme: [String] = themes.randomElement() {
+    static let facesTheme = Theme(
+        emojis: ["😀","😆","😅","🤣","😇","😉","😍","😋","😝", "😎", "🥺", "🤬"],
+        backgroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
+        cardColor: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+    )
+    
+    static let handsTheme = Theme(
+        emojis: ["🙌","👍","🤘","🖖","🤙","✊","👌","👏","👆", "💪", "☝️", "🤝"],
+        backgroundColor: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1),
+        cardColor: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+    )
+    
+    static let sportsTheme = Theme(
+        emojis: ["⚽️","🏀","🏈","⚾️","🥎","🎾","🏐","🏉","🥏", "🎱", "🏓", "🏸"],
+        backgroundColor: #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1),
+        cardColor: #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+    )
+    
+    static let animalsTheme = Theme(
+        emojis: ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐨", "🐯", "🦁", "🐷"],
+        backgroundColor: #colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1),
+        cardColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+    )
+    
+    static let natureTheme = Theme(
+        emojis: ["🍄","🌷","🌺","🌸","🌼","🌻","🥀","💐","🌾", "🍀", "☘️", "🌵"],
+        backgroundColor: #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1),
+        cardColor: #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+    )
+    
+    static let themes = [halloweenTheme, facesTheme, handsTheme, sportsTheme, animalsTheme, natureTheme]
+    
+    static func randomTheme() -> Theme {
+        if let randomTheme = themes.randomElement() {
             return randomTheme
         } else {
-            return ["??"]
+            return Theme()
         }
     }
     
-    var emojiChoices = randomTheme()
+    var emojiChoices = randomTheme().emojis
+    
     var emoji = [Int:String]()
     
     func emoji(for card: Card) -> String {
@@ -82,6 +112,7 @@ class ViewController: UIViewController {
     }
     
     var score = 0
+    
     var scoreEmojis = [String]()
         
     func calculateGameScore(for sender: UIButton) -> Int {

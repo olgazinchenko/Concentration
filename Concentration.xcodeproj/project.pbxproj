@@ -15,6 +15,7 @@
 		77410735251148F800638948 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77410733251148F800638948 /* LaunchScreen.storyboard */; };
 		7741073E2512848200638948 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7741073D2512848200638948 /* Concentration.swift */; };
 		774107402512884F00638948 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7741073F2512884F00638948 /* Card.swift */; };
+		774107422524DE3E00638948 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774107412524DE3E00638948 /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		77410736251148F800638948 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7741073D2512848200638948 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
 		7741073F2512884F00638948 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		774107412524DE3E00638948 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				7741072E251148EE00638948 /* Main.storyboard */,
 				7741073D2512848200638948 /* Concentration.swift */,
 				7741073F2512884F00638948 /* Card.swift */,
+				774107412524DE3E00638948 /* Theme.swift */,
 				7741073C251151E200638948 /* Supporting Files */,
 				77410736251148F800638948 /* Info.plist */,
 			);
@@ -155,6 +158,7 @@
 				7741072D251148EE00638948 /* ViewController.swift in Sources */,
 				7741073E2512848200638948 /* Concentration.swift in Sources */,
 				774107402512884F00638948 /* Card.swift in Sources */,
+				774107422524DE3E00638948 /* Theme.swift in Sources */,
 				77410729251148EE00638948 /* AppDelegate.swift in Sources */,
 				7741072B251148EE00638948 /* SceneDelegate.swift in Sources */,
 			);
