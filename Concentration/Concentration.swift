@@ -50,6 +50,5 @@ class Concentration {
             cards += [card, card]
         }
         cards.shuffle()
-        
     }
 }
